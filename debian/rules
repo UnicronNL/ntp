@@ -28,7 +28,8 @@ config.status:
 		--with-lineeditlibs=edit \
 		--disable-local-libopts \
 		--enable-ntp-signd \
-		--disable-dependency-tracking
+		--disable-dependency-tracking \
+		--with-openssl-libdir=/usr/lib/$(DEB_HOST_MULTIARCH)
 
 build: config build-stamp
 build-stamp: config.status

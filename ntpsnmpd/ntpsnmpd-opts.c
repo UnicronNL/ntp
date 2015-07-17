@@ -38,12 +38,11 @@ extern "C" {
 
 /* TRANSLATORS: choose the translation for option names wisely because you
                 cannot ever change your mind. */
-tSCC zCopyright[] =
-       "ntpsnmpd copyright (c) 1970-2010 David L. Mills and/or others, all rights reserved"
-/* extracted from ../include/copyright.def near line 8 */
-;
-tSCC zCopyrightNotice[24] =
-"see html/copyright.html";
+static char const zCopyright[44] =
+"ntpsnmpd 4.2.7p164\n\
+see html/copyright.html\n";
+static char const zCopyrightNotice[25] =
+"see html/copyright.html\n";
 
 extern tUsageProc optionUsage;
 
@@ -60,41 +59,41 @@ extern tUsageProc optionUsage;
 /*
  *  Nofork option description:
  */
-tSCC    zNoforkText[] =
+static char const    zNoforkText[] =
         "Do not fork";
-tSCC    zNofork_NAME[]             = "NOFORK";
-tSCC    zNofork_Name[]             = "nofork";
+static char const    zNofork_NAME[]             = "NOFORK";
+static char const    zNofork_Name[]             = "nofork";
 #define NOFORK_FLAGS       (OPTST_DISABLED)
 
 /*
  *  Syslog option description:
  */
-tSCC    zSyslogText[] =
+static char const    zSyslogText[] =
         "Log to syslog()";
-tSCC    zSyslog_NAME[]             = "SYSLOG";
-tSCC    zSyslog_Name[]             = "syslog";
+static char const    zSyslog_NAME[]             = "SYSLOG";
+static char const    zSyslog_Name[]             = "syslog";
 #define SYSLOG_FLAGS       (OPTST_DISABLED)
 
 /*
  *  Agentxsocket option description:
  */
-tSCC    zAgentxsocketText[] =
+static char const    zAgentxsocketText[] =
         "The socket address ntpsnmpd uses to connect to net-snmpd";
-tSCC    zAgentxsocket_NAME[]       = "AGENTXSOCKET";
-tSCC    zAgentxsocket_Name[]       = "agentxsocket";
-tSCC    zAgentxsocketDefaultArg[]    = "unix:/var/agentx/master";
+static char const    zAgentxsocket_NAME[]       = "AGENTXSOCKET";
+static char const    zAgentxsocket_Name[]       = "agentxsocket";
+static char const    zAgentxsocketDefaultArg[]    = "unix:/var/agentx/master";
 #define AGENTXSOCKET_FLAGS       (OPTST_DISABLED \
         | OPTST_SET_ARGTYPE(OPARG_TYPE_STRING))
 
 /*
  *  Help/More_Help/Version option descriptions:
  */
-tSCC zHelpText[]          = "Display extended usage information and exit";
-tSCC zHelp_Name[]         = "help";
+static char const zHelpText[]          = "Display extended usage information and exit";
+static char const zHelp_Name[]         = "help";
 #ifdef HAVE_WORKING_FORK
 #define OPTST_MORE_HELP_FLAGS   (OPTST_IMM | OPTST_NO_INIT)
-tSCC zMore_Help_Name[]    = "more-help";
-tSCC zMore_HelpText[]     = "Extended usage information passed thru pager";
+static char const zMore_Help_Name[]    = "more-help";
+static char const zMore_HelpText[]     = "Extended usage information passed thru pager";
 #else
 #define OPTST_MORE_HELP_FLAGS   (OPTST_OMITTED | OPTST_NO_INIT)
 #define zMore_Help_Name   NULL
@@ -107,14 +106,14 @@ tSCC zMore_HelpText[]     = "Extended usage information passed thru pager";
                                 OPTST_ARG_OPTIONAL | OPTST_IMM | OPTST_NO_INIT
 #endif
 
-tSCC zVersionText[]       = "Output version information and exit";
-tSCC zVersion_Name[]      = "version";
-tSCC zSave_OptsText[]     = "Save the option state to a config file";
-tSCC zSave_Opts_Name[]    = "save-opts";
-tSCC zLoad_OptsText[]     = "Load options from a config file";
-tSCC zLoad_Opts_NAME[]    = "LOAD_OPTS";
-tSCC zNotLoad_Opts_Name[] = "no-load-opts";
-tSCC zNotLoad_Opts_Pfx[]  = "no";
+static char const zVersionText[]       = "Output version information and exit";
+static char const zVersion_Name[]      = "version";
+static char const zSave_OptsText[]     = "Save the option state to a config file";
+static char const zSave_Opts_Name[]    = "save-opts";
+static char const zLoad_OptsText[]     = "Load options from a config file";
+static char const zLoad_Opts_NAME[]    = "LOAD_OPTS";
+static char const zNotLoad_Opts_Name[] = "no-load-opts";
+static char const zNotLoad_Opts_Pfx[]  = "no";
 #define zLoad_Opts_Name   (zNotLoad_Opts_Name + 3)
 /*
  *  Declare option callback procedures
@@ -254,20 +253,20 @@ static tOptDesc optDesc[ OPTION_CT ] = {
  *
  *  Define the Ntpsnmpd Option Environment
  */
-tSCC   zPROGNAME[]   = "NTPSNMPD";
-tSCC   zUsageTitle[] =
+static char const zPROGNAME[9] = "NTPSNMPD";
+static char const zUsageTitle[105] =
 "ntpsnmpd - NTP SNMP MIB agent - Ver. 4.2.6p2\n\
 USAGE:  %s [ -<flag> [<val>] | --<name>[{=| }<val>] ]...\n";
-tSCC   zRcName[]     = ".ntprc";
-tSCC*  apzHomeList[] = {
+static char const zRcName[7] = ".ntprc";
+static char const * const apzHomeList[3] = {
        "$HOME",
        ".",
        NULL };
 
-tSCC   zBugsAddr[]    = "http://bugs.ntp.org, bugs@ntp.org";
+static char const zBugsAddr[34] = "http://bugs.ntp.org, bugs@ntp.org";
 #define zExplain NULL
 #define zDetail         NULL
-tSCC    zFullVersion[] = NTPSNMPD_FULL_VERSION;
+static char const zFullVersion[] = NTPSNMPD_FULL_VERSION;
 /* extracted from /usr/local/gnu/share/autogen/optcode.tpl near line 495 */
 
 #if defined(ENABLE_NLS)

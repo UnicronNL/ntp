@@ -38,12 +38,11 @@ extern "C" {
 
 /* TRANSLATORS: choose the translation for option names wisely because you
                 cannot ever change your mind. */
-tSCC zCopyright[] =
-       "ntpq copyright (c) 1970-2010 David L. Mills and/or others, all rights reserved"
-/* extracted from ../include/copyright.def near line 8 */
-;
-tSCC zCopyrightNotice[24] =
-"see html/copyright.html";
+static char const zCopyright[40] =
+"ntpq 4.2.6\n\
+see html/copyright.html\n";
+static char const zCopyrightNotice[25] =
+"see html/copyright.html\n";
 
 extern tUsageProc optionUsage;
 
@@ -70,10 +69,10 @@ extern tUsageProc optionUsage;
  *  Ipv4 option description with
  *  "Must also have options" and "Incompatible options":
  */
-tSCC    zIpv4Text[] =
+static char const    zIpv4Text[] =
         "Force IPv4 DNS name resolution";
-tSCC    zIpv4_NAME[]               = "IPV4";
-tSCC    zIpv4_Name[]               = "ipv4";
+static char const    zIpv4_NAME[]               = "IPV4";
+static char const    zIpv4_Name[]               = "ipv4";
 static const int
     aIpv4CantList[] = {
     INDEX_OPT_IPV6, NO_EQUIVALENT };
@@ -83,10 +82,10 @@ static const int
  *  Ipv6 option description with
  *  "Must also have options" and "Incompatible options":
  */
-tSCC    zIpv6Text[] =
+static char const    zIpv6Text[] =
         "Force IPv6 DNS name resolution";
-tSCC    zIpv6_NAME[]               = "IPV6";
-tSCC    zIpv6_Name[]               = "ipv6";
+static char const    zIpv6_NAME[]               = "IPV6";
+static char const    zIpv6_Name[]               = "ipv6";
 static const int
     aIpv6CantList[] = {
     INDEX_OPT_IPV4, NO_EQUIVALENT };
@@ -95,29 +94,29 @@ static const int
 /*
  *  Command option description:
  */
-tSCC    zCommandText[] =
+static char const    zCommandText[] =
         "run a command and exit";
-tSCC    zCommand_NAME[]            = "COMMAND";
-tSCC    zCommand_Name[]            = "command";
+static char const    zCommand_NAME[]            = "COMMAND";
+static char const    zCommand_Name[]            = "command";
 #define COMMAND_FLAGS       (OPTST_DISABLED \
         | OPTST_SET_ARGTYPE(OPARG_TYPE_STRING))
 
 /*
  *  Debug_Level option description:
  */
-tSCC    zDebug_LevelText[] =
+static char const    zDebug_LevelText[] =
         "Increase output debug message level";
-tSCC    zDebug_Level_NAME[]        = "DEBUG_LEVEL";
-tSCC    zDebug_Level_Name[]        = "debug-level";
+static char const    zDebug_Level_NAME[]        = "DEBUG_LEVEL";
+static char const    zDebug_Level_Name[]        = "debug-level";
 #define DEBUG_LEVEL_FLAGS       (OPTST_DISABLED)
 
 /*
  *  Set_Debug_Level option description:
  */
-tSCC    zSet_Debug_LevelText[] =
+static char const    zSet_Debug_LevelText[] =
         "Set the output debug message level";
-tSCC    zSet_Debug_Level_NAME[]    = "SET_DEBUG_LEVEL";
-tSCC    zSet_Debug_Level_Name[]    = "set-debug-level";
+static char const    zSet_Debug_Level_NAME[]    = "SET_DEBUG_LEVEL";
+static char const    zSet_Debug_Level_Name[]    = "set-debug-level";
 #define SET_DEBUG_LEVEL_FLAGS       (OPTST_DISABLED \
         | OPTST_SET_ARGTYPE(OPARG_TYPE_STRING))
 
@@ -125,10 +124,10 @@ tSCC    zSet_Debug_Level_Name[]    = "set-debug-level";
  *  Peers option description with
  *  "Must also have options" and "Incompatible options":
  */
-tSCC    zPeersText[] =
+static char const    zPeersText[] =
         "Print a list of the peers";
-tSCC    zPeers_NAME[]              = "PEERS";
-tSCC    zPeers_Name[]              = "peers";
+static char const    zPeers_NAME[]              = "PEERS";
+static char const    zPeers_Name[]              = "peers";
 static const int
     aPeersCantList[] = {
     INDEX_OPT_INTERACTIVE, NO_EQUIVALENT };
@@ -138,10 +137,10 @@ static const int
  *  Interactive option description with
  *  "Must also have options" and "Incompatible options":
  */
-tSCC    zInteractiveText[] =
+static char const    zInteractiveText[] =
         "Force ntpq to operate in interactive mode";
-tSCC    zInteractive_NAME[]        = "INTERACTIVE";
-tSCC    zInteractive_Name[]        = "interactive";
+static char const    zInteractive_NAME[]        = "INTERACTIVE";
+static char const    zInteractive_Name[]        = "interactive";
 static const int
     aInteractiveCantList[] = {
     INDEX_OPT_COMMAND,
@@ -151,30 +150,30 @@ static const int
 /*
  *  Numeric option description:
  */
-tSCC    zNumericText[] =
+static char const    zNumericText[] =
         "numeric host addresses";
-tSCC    zNumeric_NAME[]            = "NUMERIC";
-tSCC    zNumeric_Name[]            = "numeric";
+static char const    zNumeric_NAME[]            = "NUMERIC";
+static char const    zNumeric_Name[]            = "numeric";
 #define NUMERIC_FLAGS       (OPTST_DISABLED)
 
 /*
  *  Old_Rv option description:
  */
-tSCC    zOld_RvText[] =
+static char const    zOld_RvText[] =
         "Always output status line with readvar";
-tSCC    zOld_Rv_NAME[]             = "OLD_RV";
-tSCC    zOld_Rv_Name[]             = "old-rv";
+static char const    zOld_Rv_NAME[]             = "OLD_RV";
+static char const    zOld_Rv_Name[]             = "old-rv";
 #define OLD_RV_FLAGS       (OPTST_DISABLED)
 
 /*
  *  Help/More_Help/Version option descriptions:
  */
-tSCC zHelpText[]          = "Display extended usage information and exit";
-tSCC zHelp_Name[]         = "help";
+static char const zHelpText[]          = "Display extended usage information and exit";
+static char const zHelp_Name[]         = "help";
 #ifdef HAVE_WORKING_FORK
 #define OPTST_MORE_HELP_FLAGS   (OPTST_IMM | OPTST_NO_INIT)
-tSCC zMore_Help_Name[]    = "more-help";
-tSCC zMore_HelpText[]     = "Extended usage information passed thru pager";
+static char const zMore_Help_Name[]    = "more-help";
+static char const zMore_HelpText[]     = "Extended usage information passed thru pager";
 #else
 #define OPTST_MORE_HELP_FLAGS   (OPTST_OMITTED | OPTST_NO_INIT)
 #define zMore_Help_Name   NULL
@@ -187,14 +186,14 @@ tSCC zMore_HelpText[]     = "Extended usage information passed thru pager";
                                 OPTST_ARG_OPTIONAL | OPTST_IMM | OPTST_NO_INIT
 #endif
 
-tSCC zVersionText[]       = "Output version information and exit";
-tSCC zVersion_Name[]      = "version";
-tSCC zSave_OptsText[]     = "Save the option state to a config file";
-tSCC zSave_Opts_Name[]    = "save-opts";
-tSCC zLoad_OptsText[]     = "Load options from a config file";
-tSCC zLoad_Opts_NAME[]    = "LOAD_OPTS";
-tSCC zNotLoad_Opts_Name[] = "no-load-opts";
-tSCC zNotLoad_Opts_Pfx[]  = "no";
+static char const zVersionText[]       = "Output version information and exit";
+static char const zVersion_Name[]      = "version";
+static char const zSave_OptsText[]     = "Save the option state to a config file";
+static char const zSave_Opts_Name[]    = "save-opts";
+static char const zLoad_OptsText[]     = "Load options from a config file";
+static char const zLoad_Opts_NAME[]    = "LOAD_OPTS";
+static char const zNotLoad_Opts_Name[] = "no-load-opts";
+static char const zNotLoad_Opts_Pfx[]  = "no";
 #define zLoad_Opts_Name   (zNotLoad_Opts_Name + 3)
 /*
  *  Declare option callback procedures
@@ -425,19 +424,19 @@ static tOptDesc optDesc[ OPTION_CT ] = {
  *
  *  Define the Ntpq Option Environment
  */
-tSCC   zPROGNAME[]   = "NTPQ";
-tSCC   zUsageTitle[] =
+static char const zPROGNAME[5] = "NTPQ";
+static char const zUsageTitle[121] =
 "ntpq - standard NTP query program - Ver. 4.2.6p2\n\
 USAGE:  %s [ -<flag> [<val>] | --<name>[{=| }<val>] ]... [ host ...]\n";
-tSCC   zRcName[]     = ".ntprc";
-tSCC*  apzHomeList[] = {
+static char const zRcName[7] = ".ntprc";
+static char const * const apzHomeList[3] = {
        "$HOME",
        ".",
        NULL };
 
-tSCC   zBugsAddr[]    = "http://bugs.ntp.org, bugs@ntp.org";
+static char const zBugsAddr[34] = "http://bugs.ntp.org, bugs@ntp.org";
 #define zExplain NULL
-tSCC    zDetail[]     = "\n\
+static char const zDetail[384] = "\n\
 The\n\
 [= prog-name =]\n\
 utility program is used to query NTP servers which\n\
@@ -446,7 +445,7 @@ in Appendix B of the NTPv3 specification RFC1305, requesting\n\
 information about current state and/or changes in that state.\n\
 The same formats are used in NTPv4, although some of the\n\
 variables have changed and new ones added.\n";
-tSCC    zFullVersion[] = NTPQ_FULL_VERSION;
+static char const zFullVersion[] = NTPQ_FULL_VERSION;
 /* extracted from /usr/local/gnu/share/autogen/optcode.tpl near line 495 */
 
 #if defined(ENABLE_NLS)

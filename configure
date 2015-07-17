@@ -23368,10 +23368,10 @@ case "$ans" in
 esac
 case "$ans" in
  no) ;;
- *) # look for openssl/opensslconf.h:
+ *) # look for openssl/opensslv.h:
     for i in $ans no
     do
-	test -f $i/openssl/opensslconf.h && break
+	test -f $i/openssl/opensslv.h && break
     done
     case "$i" in
      no)
@@ -23415,16 +23415,119 @@ $as_echo "$ans" >&6; }
 case "$ntp_openssl" in
  yes)
     # We have OpenSSL inc/lib - use them.
-    CPPFLAGS="$CPPFLAGS -I$OPENSSL_INC"
-    LDFLAGS="$LDFLAGS -L$OPENSSL_LIB"
-    case "$need_dash_r" in
-     1) LDFLAGS="$LDFLAGS -R$OPENSSL_LIB"
+    case "$OPENSSL_INC" in
+     /usr/include)
+       ;;
+     *)
+       CPPFLAGS="$CPPFLAGS -I$OPENSSL_INC"
+       ;;
+    esac
+    case "$OPENSSL_LIB" in
+     /usr/lib)
+       ;;
+     *)
+       LDFLAGS="$LDFLAGS -L$OPENSSL_LIB"
+       case "$need_dash_r" in
+        1)
+           LDFLAGS="$LDFLAGS -R$OPENSSL_LIB"
+       esac
+       ;;
     esac
     LCRYPTO=-lcrypto
 
 
-$as_echo "#define OPENSSL /**/" >>confdefs.h
+$as_echo "#define OPENSSL 1" >>confdefs.h
 
+esac
+
+#
+# check for linking with -lcrypto failure, and try -lz -lcrypto.
+# Helps m68k-atari-mint
+#
+case "$ntp_openssl" in
+ yes)
+    NTPO_SAVED_LIBS="$LIBS"
+    LIBS="$NTPO_SAVED_LIBS $LCRYPTO"
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking if linking with $LCRYPTO alone works" >&5
+$as_echo_n "checking if linking with $LCRYPTO alone works... " >&6; }
+if ${ntp_cv_bare_lcrypto+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+                   #include "openssl/err.h"
+                   #include "openssl/evp.h"
+
+int
+main ()
+{
+
+                   ERR_load_crypto_strings();
+                   OpenSSL_add_all_algorithms();
+
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ntp_cv_bare_lcrypto=yes
+else
+  ntp_cv_bare_lcrypto=no
+
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ntp_cv_bare_lcrypto" >&5
+$as_echo "$ntp_cv_bare_lcrypto" >&6; }
+    case "$ntp_cv_bare_lcrypto" in
+     no)
+       LIBS="$NTPO_SAVED_LIBS $LCRYPTO -lz"
+       { $as_echo "$as_me:${as_lineno-$LINENO}: checking if linking with $LCRYPTO -lz works" >&5
+$as_echo_n "checking if linking with $LCRYPTO -lz works... " >&6; }
+if ${ntp_cv_lcrypto_lz+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+                       #include "openssl/err.h"
+                       #include "openssl/evp.h"
+
+int
+main ()
+{
+
+                       ERR_load_crypto_strings();
+                       OpenSSL_add_all_algorithms();
+
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ntp_cv_lcrypto_lz=yes
+else
+  ntp_cv_lcrypto_lz=no
+
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ntp_cv_lcrypto_lz" >&5
+$as_echo "$ntp_cv_lcrypto_lz" >&6; }
+       case "$ntp_cv_lcrypto_lz" in
+        yes)
+            LCRYPTO="$LCRYPTO -lz"
+       esac
+    esac
+    LIBS="$NTPO_SAVED_LIBS"
+    { NTPO_SAVED_LIBS=; unset NTPO_SAVED_LIBS;}
 esac
 
 #
